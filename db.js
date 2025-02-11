@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '1234', // รหัสผ่าน MySQL
+  password: '', // รหัสผ่าน MySQL
   database: 'netflix_db' // ชื่อฐานข้อมูล
 });
 

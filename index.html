@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>เข้าสู่ระบบ</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="ชื่อผู้ใช้งาน" required>
+            <input type="password" id="password" name="password" placeholder="รหัสผ่าน" required>
+            <button type="submit">เข้าสู่ระบบ</button>
+        </form>
+        <a href="/register.html">สมัครสมาชิก</a>
+    </div>
+    <script>
+        // ดักจับเหตุการณ์เมื่อผู้ใช้ส่งฟอร์ม
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = '/home.html'; // เปลี่ยนหน้าไปยัง home.html
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
